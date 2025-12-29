@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SoftEng Research Hub - студентський науковий гурток</title>
+  <meta name="description" content="SoftEng Research Hub - студентський науковий гурток КІТС ДПУ. Щомісячні засідання за планом роботи 2025–2026 н.р.">
+  <meta name="theme-color" content="#0B0C0F">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --surface: rgba(20, 22, 26, 0.6);
+      --surface-hover: rgba(30, 35, 45, 0.8);
+      --text: #E6EAF2;
+      --text-dim: #94A3B8;
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.3);
+      --gradient-primary: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --space-4: 16px;
+      --space-5: 24px;
+      --space-6: 32px;
+      --space-7: 64px;
+      --container: 1100px;
+      
+      --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+      --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    * { box-sizing: border-box; }
+    
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover { color: #818cf8; }
+
+    body::-webkit-scrollbar { width: 0px; }
+    body::-webkit-scrollbar-track { background: transparent; }
+    body::-webkit-scrollbar-thumb { background: transparent; }
+
+    .container {
+      width: min(100% - 2 * var(--space-4), var(--container));
+      margin-inline: auto;
+    }
+
+    /* Header */
+   header {
+      position: fixed;
+      top: 0;
+      z-index: 999;
+      background: rgba(5, 5, 7, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+      width: 100vw;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 16px;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links { display: none; gap: 8px; }
+    
+    .nav-links a {
+      color: var(--text-dim);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-links a[aria-current="page"] {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border);
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      padding: 8px;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    @media (min-width: 900px) {
+      .nav-links { display: flex; }
+      .burger { display: none; }
+    }
+
+    /* Mobile Menu */
+    .mobile-panel {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid var(--border);
+      background: rgba(5, 5, 7, 0.95);
+      backdrop-filter: blur(20px);
+    }
+    .mobile-panel.open { display: block; }
+    .mobile-panel a {
+      display: block;
+      padding: 12px;
+      color: var(--text);
+      font-weight: 600;
+      border-radius: 8px;
+    }
+    .mobile-panel a:hover { background: rgba(255,255,255,0.05); }
+
+    .page-background {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 1;
+      filter: contrast(2.0);
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: inherit;
+      line-height: 1.2;
+    }
+    
+    h1 { font-size: clamp(32px, 5vw, 56px); }
+    h2 { font-size: clamp(24px, 3vw, 32px); margin-bottom: 24px; }
+    h3 { font-size: clamp(18px, 2vw, 22px); margin-bottom: 8px; }
+    
+    p, li { font-size: 1rem; color: var(--text-dim); }
+    strong { color: var(--text); }
+
+    .text-gradient {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Hero */
+    .hero {
+      padding-block: 120px 80px;
+      text-align: center;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin-inline: auto;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin-inline: auto;
+      margin-top: 24px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                  background 0.3s ease, 
+                  border-color 0.3s ease,
+                  box-shadow 0.3s ease;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: var(--surface-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6), 
+                  0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    section { padding-block: var(--space-6); }
+    
+    .grid {
+      display: grid;
+      gap: var(--space-5);
+    }
+
+    @media (min-width: 768px) {
+      .cols-2 { grid-template-columns: repeat(2, 1fr); }
+      .cols-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+    
+    @media (max-width: 767px) {
+      .cols-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    }
+
+    /* Members */
+    .member-card {
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .member-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    
+    .member-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .member-card:hover .member-photo img {
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-block: 48px;
+      background: rgba(5,5,7,0.8);
+      backdrop-filter: blur(10px);
+      margin-top: 60px;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    .reveal-text { opacity: 0; }
+    .is-visible .reveal-text {
+      animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    
+    .text-delay-1 { animation-delay: 0.1s; }
+    .text-delay-2 { animation-delay: 0.2s; }
+    
+    #plan, #docs, #members { scroll-margin-top: 100px; }
+  </style>
+</head>
+<body>
+  <video class="page-background" autoplay muted loop playsinline poster="Снимок экрана 2025-10-09 213640.png" preload="auto" aria-hidden="true">
+    <source src="4K Space_Star scene - Free M.G Stock Footage - CyberWebFX (1080p, h264).mp4" type="video/mp4" />
+  </video>
+  <header>
+    <div class="container nav" role="navigation" aria-label="навігація">
+      <div class="brand">
+        <span>SoftEng Research Hub</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#" aria-current="page">Головна</a>
+        <a href="#plan">Події</a>
+        <a href="#docs">Документи</a>
+        <a href="#members">Керівний склад</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Меню">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="mobile-panel">
+      <nav class="container grid" style="gap:8px">
+        <a href="#" aria-current="page">Головна</a>
+        <a href="#plan">Події</a>
+        <a href="#docs">Документи</a>
+        <a href="#members">Керівний склад</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="reveal-text">Студентський науковий гурток <br><span class="text-gradient">SoftEng Research Hub</span></h1>
+          <p class="muted reveal-text text-delay-1">
+            Офіційний річний <strong>План роботи 2025–2026</strong> передбачає щомісячні засідання та тематичні активності.
+            Регулярний слот: <strong>третій четвер місяця, 13:20</strong>, аудиторія <strong>В414</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Наступна зустріч (за планом) -->
+    <section>
+      <div class="container">
+        <article class="card" style="border-left: 4px solid var(--accent);">
+            <h2 class="reveal-text">Найближча зустріч за планом</h2>
+
+    <!-- РІЧНИЙ ПЛАН (витяг без вигадок) -->
+    <section aria-labelledby="#plan">
+      <div class="container">
+        <h2 id="plan" class="reveal-text">План роботи 2025–2026 (витяг)</h2>
+        <div class="grid cols-2">
+          <!-- Вересень -->
+          <article class="card">
+            <h3 class="reveal-text">Вересень</h3>
+            <ul>
+              <li><strong>Організаційне засідання:</strong> ознайомлення з метою і завданнями гуртка; розподіл напрямів досліджень; обговорення річного плану роботи.</li>
+              <li><strong>Лекція-дискусія:</strong> наукова діяльність у сфері комп’ютерних наук; академічна доброчесність.</li>
+            </ul>
+            <p class="muted">Час і місце: третій четвер, 13:20 · ауд. В414</p>
+          </article>
+
+          <!-- Жовтень -->
+          <article class="card">
+            <h3 class="reveal-text">Жовтень</h3>
+            <ul>
+              <li><strong>Семінар:</strong> актуальні проблеми сучасної програмної інженерії.</li>
+              <li><strong>Практичне заняття:</strong> пошук наукової інформації в базах даних, бібліографія, оформлення джерел.</li>
+              <li><strong>Індивідуальна робота:</strong> вибір тем міні-досліджень.</li>
+            </ul>
+            <p class="muted">Час і місце: третій четвер, 13:20 · ауд. В414</p>
+          </article>
+
+          <!-- Листопад -->
+          <article class="card">
+            <h3 class="reveal-text">Листопад</h3>
+            <ul>
+              <li><strong>Семінар:</strong> основи академічного письма і правила оформлення наукових робіт.</li>
+              <li><strong>Засідання гуртка:</strong> короткі повідомлення студентів за обраними темами.</li>
+            </ul>
+            <p class="muted">Час і місце: третій четвер, 13:20 · ауд. В414</p>
+          </article>
+
+          <!-- Грудень -->
+          <article class="card">
+            <h3 class="reveal-text">Грудень</h3>
+            <ul>
+              <li><strong>Майстер-клас:</strong> системи контролю версій (Git) і дослідження в колективній роботі.</li>
+              <li><strong>Індивідуальна робота:</strong> підготовка тез до студентської наукової конференції.</li>
+            </ul>
+            <p class="muted">Час і місце: третій четвер, 13:20 · ауд. В414</p>
+          </article>
+
+          <!-- Січень -->
+          <article class="card">
+            <h3 class="reveal-text">Січень</h3>
+            <ul>
+              <li><strong>Дискусія:</strong> сучасні мови програмування та їх застосування.</li>
+              <li><strong>Засідання гуртка:</strong> проміжний звіт про виконання міні-досліджень.</li>
+            </ul>
+            <p class="muted">Час і місце: третій четвер, 13:20 · ауд. В414</p>
+          </article>
+
+          <!-- Лютий -->
+          <article class="card">
+            <h3 class="reveal-text">Лютий</h3>
+            <ul>
+              <li><strong>Брейнштормінг:</strong> обговорення ідей студентських стартапів.</li>
+            </ul>
+            <p class="muted">Час і місце: третій четвер, 13:20 · ауд. В414</p>
+          </article>
+
+          <!-- Березень -->
+          <article class="card">
+            <h3 class="reveal-text">Березень</h3>
+            <ul>
+              <li><strong>Практикум:</strong> основи роботи з віртуальними середовищами (на прикладі Python venv).</li>
+            </ul>
+            <p class="muted">Час і місце: третій четвер, 13:20 · ауд. В414</p>
+          </article>
+
+          <!-- Квітень -->
+          <article class="card">
+            <h3 class="reveal-text">Квітень</h3>
+            <ul>
+              <li><strong>Засідання гуртка:</strong> виступи студентів з проміжними результатами досліджень.</li>
+              <li><strong>Конференція:</strong> участь у студентській науковій конференції.</li>
+            </ul>
+            <p class="muted">Регулярний слот: третій четвер, 13:20 · ауд. В414. Конференція — за графіком організаторів.</p>
+          </article>
+
+          <!-- Травень -->
+          <article class="card">
+            <h3 class="reveal-text">Травень</h3>
+            <ul>
+              <li><strong>Воркшоп:</strong> основи DevOps: контейнеризація застосунку з Docker. Навіщо потрібен Docker?</li>
+              <li><strong>Семінар:</strong> методології розробки ПЗ: Agile, Scrum, DevOps.</li>
+            </ul>
+            <p class="muted">Час і місце: третій четвер, 13:20 · ауд. В414</p>
+          </article>
+
+          <!-- Червень -->
+          <article class="card">
+            <h3 class="reveal-text">Червень</h3>
+            <ul>
+              <li><strong>Засідання гуртка:</strong> презентації результатів студентських досліджень.</li>
+              <li><strong>Підсумкове засідання:</strong> підбиття підсумків роботи гуртка; відзначення активних учасників; формування планів на наступний рік.</li>
+            </ul>
+            <p class="muted">Час і місце: третій четвер, 13:20 · ауд. В414</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="docs">
+      <div class="container">
+        <h2 id="docs" class="reveal-text">Документи</h2>
+        <div class="grid cols-2">
+          <article class="card">
+            <h3 class="reveal-text"><a href="https://dpu.edu.ua/images/2025/Postijni%20photo%20dla%20storinok%202025/Kafedra%20komputernih%20ta%20informacijnih%20tehnologij%20i%20sistem/Studentskij%20naukovij%20gurtok%20SoftEng%20Research%20Hub/KITS_Polozenna_SOFTENG%20RESEARCH%20HUB.pdf" target="_blank" rel="noopener">Положення гуртка (офіційна сторінка)</a></h3>
+            <p class="muted">Цілі, завдання, форми роботи, членство та управління.</p>
+          </article>
+          <article class="card">
+            <h3 class="reveal-text"><a href="https://dpu.edu.ua/images/2025/Postijni%20photo%20dla%20storinok%202025/Kafedra%20komputernih%20ta%20informacijnih%20tehnologij%20i%20sistem/Studentskij%20naukovij%20gurtok%20SoftEng%20Research%20Hub/KITS_Plan%20roboti%20gurtka%20SoftEng%20Research%20Hub.pdf" target="_blank" rel="noopener">План роботи 2025–2026 (PDF / витяг)</a></h3>
+            <p class="muted">Місячні активності та регулярний слот «третій четвер, 13:20, В414».</p>
+          </article>
+        </div>
+  <h2 id="members" class="reveal-text" style="margin-top:var(--space-6)">Керівний склад гуртка</h2>
+  <div class="grid cols-3">
+          <article class="card member-card">
+            <div class="member-photo"><img src="Lagovskij V.V.jpg" alt="Володимир Лаговський" loading="lazy"></div>
+            <h3 class="reveal-text">Володимир Лаговський</h3>
+            <p class="muted">к.е.н., керівник гуртка, доцент кафедри комп’ютерних та інформаційних технологій і систем</p>
+          </article>
+          <article class="card member-card">
+            <div class="member-photo"><img src="Prajs Igor Semenovic .jpg" alt="Прайс Ігор" loading="lazy"></div>
+            <h3 class="reveal-text">Прайс Ігор</h3>
+            <p class="muted">студент групи КБ-25-1, секретар гуртка</p>
+          </article>
+          <article class="card member-card">
+            <div class="member-photo"><img src="Munister Vaceslav Denisovic.jpg" alt="Муністер В'ячеслав" loading="lazy"></div>
+            <h3 class="reveal-text">Муністер В'ячеслав</h3>
+            <p class="muted">студент групи КБ-25-1, староста гуртка</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container grid">
+      <div>
+        <strong>SoftEng Research Hub</strong>
+  <p class="muted">Над сайтом працював Чубатов Микита (lynstry)</p>
+      </div>
+      <div>
+        <p class="muted">© 2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const burger=document.getElementById("burger"), panel=document.getElementById("mobileMenu");
+      burger?.addEventListener("click",()=>{
+        const open=panel.classList.toggle("open");
+        burger.setAttribute("aria-expanded",String(open));
+      });
+    })();
+
+    const revealObserver=new IntersectionObserver((entries,observer)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },{threshold:0.08,rootMargin:"0px 0px -10%"});
+
+    const prepareReveal=()=>{
+      const main=document.getElementById("main");
+      if(!main)return;
+      const hiddenTags=["SCRIPT","STYLE","VIDEO","SOURCE","TRACK"];
+      const candidates=Array.from(main.querySelectorAll("*"))
+        .filter(el=>el instanceof HTMLElement && !hiddenTags.includes(el.tagName));
+      candidates.forEach(el=>{
+        const allowNested=el.matches(".card");
+        const ancestorWithReveal=el.parentElement?.closest("[data-reveal]");
+        if(ancestorWithReveal && !allowNested)return;
+        if(!el.hasAttribute("data-reveal"))el.setAttribute("data-reveal","");
+        if(!el.classList.contains("is-visible"))revealObserver.observe(el);
+      });
+    };
+
+    prepareReveal();
+    if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",prepareReveal);
+  </script>
+</body>
+</html>
